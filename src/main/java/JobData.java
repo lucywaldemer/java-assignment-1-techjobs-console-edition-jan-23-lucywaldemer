@@ -68,6 +68,7 @@ public class JobData {
      * @param value Value of teh field to search for
      * @return List of all jobs matching the criteria
      */
+
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
 
         // load data, if not already loaded
@@ -77,13 +78,15 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue = row.get(column).toUpperCase();
 
-            if (aValue.contains(value)) {
+            if (aValue.contains(value.toUpperCase())) {
                 jobs.add(row);
             }
         }
-
+        if(jobs.isEmpty()){
+         jobs.clear();
+        }
         return jobs;
     }
 
@@ -93,13 +96,37 @@ public class JobData {
      * @param value The search term to look for
      * @return      List of all jobs with at least one field containing the value
      */
+    //At this stage, the application will allow users to search a given column of
+    // the data for a given String. Your next task is to enable a search that looks
+    // for the search term in all of the columns.
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        // loop through the jobs
+        // try to search for a match in the columns
+        // print a match
+        //set user search term to upper case
+        // String upperValue = value.toUpperCase();
+
+//        if(allJobs.isEmpty()){
+//            System.out.println("No Results");
+//            return null;
+//        }
+        for(HashMap<String, String> job : allJobs){
+            for(String keysOfJobs : job.keySet()) {
+                //case insensitive values
+                String upperJobInfo = job.get(keysOfJobs).toUpperCase();
+              //  System.out.println(upperValue + ": " + upperJobInfo);
+                if (keysOfJobs.toUpperCase().contains(value.toUpperCase())){
+               // if (upperJobInfo.contains(upperValue)) {
+                    jobs.add(job);
+                }
+            }
+        }
+        return jobs;
     }
 
     /**

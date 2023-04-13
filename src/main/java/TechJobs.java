@@ -118,8 +118,28 @@ public class TechJobs {
     }
 
     // Print a list of jobs
+//    String input = "0\n2\nBuzzbold\nx";
+//    String output = runProgramWithInput(input);
+//    String expected = getFileContents("src/test/resources/testPrintJobs.txt");
+//    assertEquals(expected, output);
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        System.out.println("printJobs is not implemented yet");
-    }
+// print out the position type, name, employer, location, core competency, and asterisks (*****) which are stored in columnChoices HashMap
+   // creating a nested loop to loop over each HashMap
+        //  for (ArrayListOfJobs) [each job is itself a HashMap]
+        //  if (columnChoices has a key:value){ print} else {sout(No Results)}
+//for (ArrayList of HashMap){
+//    if( contains )
+//}
+        if(someJobs.isEmpty()){
+            System.out.print("No Results");
+            return;
+        }
+        for(HashMap<String, String> job : someJobs){
+            System.out.println("\n*****");
+            for(String keysOfJobs : job.keySet()) {
+                System.out.println(keysOfJobs + ": " + job.get(keysOfJobs));
+            }
+            System.out.println("*****");
+        }
+   }
 }
